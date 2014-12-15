@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+
+    <ListView android:id="@+id/listView1" android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/start_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        <!--android:background="@drawable/message_bar" >-->
+
+        <TextView
+            android:id="@+id/start_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Start: "
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:hint="Please select Start Time and Date"
+            android:textSize="16sp" />
+        <!--android:background="@drawable/message_field"-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/start_date_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        <!--android:background="@drawable/message_bar" >-->
+
+    <Button
+        android:id="@+id/start_date_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Date" />
+
+    <Button
+            android:id="@+id/start_time_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Time" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/end_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        <!--android:background="@drawable/message_bar" >-->
+
+        <TextView
+            android:id="@+id/end_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="End: "
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:hint="Please select End Time and Date"
+            android:textSize="16sp" />
+        <!--android:background="@drawable/message_field"-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/end_date_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        <!--android:background="@drawable/message_bar" >-->
+
+        <Button
+            android:id="@+id/end_date_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Date" />
+
+        <Button
+            android:id="@+id/end_time_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Time" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/confirm_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        <!--android:background="@drawable/message_bar" >-->
+
+        <Button
+            android:id="@+id/confirm_create_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirm Selections" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

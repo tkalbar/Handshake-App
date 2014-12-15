@@ -1,0 +1,50 @@
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+    <!--<FrameLayout
+            android:id="@+id/login_handshake_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>-->
+    <FrameLayout
+            android:id="@+id/center_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="300dp"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:divider="@color/primary"
+        android:dividerHeight="1dp"
+        android:background="@color/light_gray"/>
+
+    <ExpandableListView
+        android:id="@+id/right_drawer"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:choiceMode="singleChoice"
+        android:divider="@color/primary"
+        android:childDivider="@color/primary"
+        android:dividerHeight="1dp"
+        android:groupIndicator="@android:color/transparent"
+        android:background="@color/light_gray"/>
+
+</android.support.v4.widget.DrawerLayout>

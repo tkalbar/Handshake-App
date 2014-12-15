@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/my_favorite_toolbar"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:minHeight="?attr/actionBarSize"
+    android:background="@color/primary_dark"
+    app:theme="@style/MySpecialTheme"
+    app:popupTheme="@style/Theme.AppCompat.Light"/>
+    <!--    android:background="?attr/colorPrimaryDark"-->
+    <!-- app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" -->

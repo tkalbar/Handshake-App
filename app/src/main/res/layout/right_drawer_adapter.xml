@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/status_icon"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:contentDescription="Todo"
+        android:scaleType="center"/>
+
+    <TextView
+        android:id="@+id/route_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="2dp"
+        android:gravity="center_horizontal"
+        android:layout_weight="1"
+        android:textSize="24sp"
+        android:singleLine="true">
+    </TextView>
+    <!--<ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:max="100"
+        android:layout_gravity="bottom"
+        style="@style/ProgressBarStyle" />-->
+
+</LinearLayout>
