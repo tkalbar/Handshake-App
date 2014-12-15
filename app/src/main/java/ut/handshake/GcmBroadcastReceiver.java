@@ -141,6 +141,31 @@ public class GcmBroadcastReceiver extends BroadcastReceiver {
         mBuilder.setDeleteIntent(getDeleteIntent());
         mNotificationManager.notify(Handshake.notification_id, mBuilder.build());
 
+        String userId = Handshake.userId;
+        if (userId == null) {
+            return;
+        }
+        Route curRoute = Handshake.getCurrentRoute();
+        if (curRoute == null) {
+            return;
+        }
+        Conversation curConversation = Handshake.getCurrentConversation();
+        if (curConversation == null) {
+            return;
+        }
+
+
+        if (curRoute!=null && curConversation!=null && userId!= null) {
+            String owner = curRoute.getOwner();
+            String clientUserId = null;
+            if (owner.equals(userId)) {
+                clientUserId = curConversation.getOtherId();
+            } else {
+                clientUserId = userId;
+            }
+            HandshakeHttpHandlers.getMessagesByRouteAndClient(clientUserId, curRoute.getRouteId(), "");
+        }
+
     }
 
     private PendingIntent getDeleteIntent()

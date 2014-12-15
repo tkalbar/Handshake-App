@@ -262,7 +262,7 @@ public class ListFragment extends android.support.v4.app.Fragment {
 
             } else {
                 holder.profileIcon.getLayoutParams().width = 0;
-                Message curMessage = Handshake.activeMessages.get(position);
+                Message curMessage = Handshake.activeMessages.get(Handshake.activeMessages.size()-position-1);
 
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) holder.relView.getLayoutParams();
                 //lp.gravity = Gravity.RIGHT;
@@ -273,6 +273,8 @@ public class ListFragment extends android.support.v4.app.Fragment {
                 if (curMessage.isMine()) {
                     lp.gravity = Gravity.RIGHT;
                     holder.relView.setBackgroundResource(R.drawable.send_first);
+                    holder.mainText.setTextColor(getActivity().getResources().getColor(R.color.text_primary));
+                    holder.subText.setTextColor(getActivity().getResources().getColor(R.color.text_primary));
                 }
                 else {
                     lp.gravity = Gravity.LEFT;
@@ -281,10 +283,14 @@ public class ListFragment extends android.support.v4.app.Fragment {
                     holder.subText.setTextColor(getActivity().getResources().getColor(R.color.almost_white));
                 }
                 holder.relView.setLayoutParams(lp);
-                holder.subText.setText(timestampList.get(position));
+                holder.subText.setText(timestampList.get(Handshake.activeMessages.size()-position-1));
             }
 
-            holder.mainText.setText(mainTextList.get(position));
+            if (allowClicks) {
+                holder.mainText.setText(mainTextList.get(position));
+            } else {
+                holder.mainText.setText(mainTextList.get(Handshake.activeMessages.size()-position-1));
+            }
 
             return view;
 

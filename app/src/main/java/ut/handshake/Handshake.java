@@ -267,13 +267,13 @@ public class Handshake extends ActionBarActivity implements ListFragment.OnListL
             routes = new CopyOnWriteArrayList<>();
         }
 
-        HandshakeHttpHandlers.getRoutesForUser(userId);
+        //HandshakeHttpHandlers.getRoutesForUser(userId);
 
         if (extras != null) {
             if (extras.getBoolean("FromPush")) {
                 // this is from a push notification
-                String routeId = extras.getString("RouteId");
-                String clientUserId = extras.getString("clientUserId");
+                //String routeId = extras.getString("RouteId");
+                //String clientUserId = extras.getString("clientUserId");
                 //HandshakeHttpHandlers.getMessagesByRouteAndClient();
             }
         }
@@ -535,6 +535,7 @@ public class Handshake extends ActionBarActivity implements ListFragment.OnListL
         } else if (typeIndex==1) {
             activeConversation = activeRoute;
 
+            // userId must be client since this is a join route
             HandshakeHttpHandlers.getMessagesByRouteAndClient(userId, activeRoute, "");
             //populateFragmentMessages();
         }
@@ -587,7 +588,11 @@ public class Handshake extends ActionBarActivity implements ListFragment.OnListL
 
         for (Message m : activeMessages) {
             messageBodies.add(m.getMessageBody());
-            messageTimeStamps.add("test time");
+            long time = m.getMessageTime().getTime().getTime();
+
+            String timeStr = (String) android.text.format.DateUtils.getRelativeTimeSpanString(time);
+
+            messageTimeStamps.add(timeStr);
         }
         ListFragment newListFragment = ListFragment.newInstance(null, messageBodies, messageTimeStamps, true, false);
         //toolbar.setTitle(activeRoute);
@@ -602,7 +607,7 @@ public class Handshake extends ActionBarActivity implements ListFragment.OnListL
                 .commit();
     }
 
-    public Route getCurrentRoute() {
+    public static Route getCurrentRoute() {
         for (Route route : routes) {
             if (route.getRouteId().equals(activeRoute)) {
                 return route;
@@ -611,9 +616,13 @@ public class Handshake extends ActionBarActivity implements ListFragment.OnListL
         return null;
     }
 
-    public Conversation getCurrentConversation() {
+    public static Conversation getCurrentConversation() {
         for (Conversation convo : getCurrentRoute().getConversations()) {
-            if (convo.getOtherId().equals(activeConversation)) {
+            if (convo.getOtherId()==null) {
+                // must be a client with only 1 convo
+                return convo;
+            }
+            else if (convo.getOtherId().equals(activeConversation)) {
                 return convo;
             }
         }
@@ -638,11 +647,23 @@ public class Handshake extends ActionBarActivity implements ListFragment.OnListL
     }
 
     public void conversationClickHandler(String conversationName) {
-        activeConversation = conversationName;
+        for (Conversation convo : getCurrentRoute().getConversations()) {
+            if (conversationName.equals(convo.getOtherDisplayName())) {
+                activeConversation = convo.getOtherId();
+            }
+        }
 
         activeMessages = getCurrentConversation().getMessages();
 
-        HandshakeHttpHandlers.getMessagesByRouteAndClient(conversationName, activeRoute, "");
+
+        // check who client is
+        String clientUserId = null;
+        if (getCurrentRoute().getOwner().equals(userId)) {
+            clientUserId = activeConversation;
+        } else {
+            clientUserId = userId;
+        }
+        HandshakeHttpHandlers.getMessagesByRouteAndClient(clientUserId, activeRoute, "");
 
     }
 
@@ -651,7 +672,7 @@ public class Handshake extends ActionBarActivity implements ListFragment.OnListL
         // Attempt to send message
         String receiverId = null;
         if (getCurrentRoute().getOwner().equals(userId)) {
-            receiverId = userId;
+            receiverId = getCurrentConversation().getOtherId();
         }
         HandshakeHttpHandlers.postNewMessage(messageToSend, receiverId);
     }

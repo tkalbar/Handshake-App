@@ -495,8 +495,10 @@ public class HandshakeHttpHandlers {
     public static void postNewMessage(Message newMessage, String receiverUserId) {
         RequestParams params = new RequestParams();
         params.put("message", newMessage.getMessageBody());
+
         if (receiverUserId != null) {
             params.put("receiverUserId", receiverUserId);
+            Log.d(TAG, "receiverUserId: "+receiverUserId);
         }
         params.put("senderUserId", newMessage.getFrom());
         params.put("routeId", newMessage.getRouteId());
