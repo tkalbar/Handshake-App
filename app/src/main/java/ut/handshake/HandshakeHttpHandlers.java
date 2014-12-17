@@ -216,7 +216,8 @@ public class HandshakeHttpHandlers {
                         JSONObject curPair = members.getJSONObject(i);
                         String memberDisplayName = curPair.getString("memberId");
                         String memberId = curPair.getString("userId");
-                        newConvos.add(new Conversation(memberDisplayName, memberId, new ArrayList<Message>()));
+                        String memberDisplayActual = curPair.getString("displayName");
+                        newConvos.add(new Conversation(memberDisplayActual, memberDisplayName, memberId, new ArrayList<Message>()));
                     }
                     curRoute.setConversations(newConvos);
                     mHandshakeInstance.populateFragmentConvos();
@@ -250,7 +251,7 @@ public class HandshakeHttpHandlers {
                     // Special case for client: make another convo
                     if (!curRoute.getOwner().equals(Handshake.userId)) {
                         ArrayList<Conversation> convos = new ArrayList<>();
-                        convos.add(new Conversation(curRoute.getRouteId(),null, new ArrayList<Message>()));
+                        convos.add(new Conversation(null, curRoute.getRouteId(),null, new ArrayList<Message>()));
                         curRoute.setConversations(convos);
                     }
 

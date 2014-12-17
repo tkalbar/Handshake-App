@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/profile_icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="false"
             android:layout_alignParentTop="false"
             android:layout_marginRight="6dip"

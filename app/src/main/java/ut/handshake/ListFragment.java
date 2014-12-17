@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -259,8 +260,11 @@ public class ListFragment extends android.support.v4.app.Fragment {
 
             // Conversation List vs Single Conversation settings
             if (allowClicks) {
-
+                holder.subText.setVisibility(View.GONE);
+                holder.mainText.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
             } else {
+                holder.subText.setVisibility(View.VISIBLE);
+                holder.mainText.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
                 holder.profileIcon.getLayoutParams().width = 0;
                 Message curMessage = Handshake.activeMessages.get(Handshake.activeMessages.size()-position-1);
 

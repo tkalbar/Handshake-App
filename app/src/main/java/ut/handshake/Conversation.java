@@ -8,16 +8,26 @@ import java.util.ArrayList;
  */
 public class Conversation implements Serializable {
 
+    private String otherActualDisplayName;
     private String otherDisplayName;
     private String otherId;
     private ArrayList<Message> messages;
 
-    public Conversation (String otherDisplayName, String otherId, ArrayList<Message> messages) {
+    public Conversation (String otherActualDisplayName, String otherDisplayName, String otherId, ArrayList<Message> messages) {
+        this.otherActualDisplayName = otherActualDisplayName;
         this.otherDisplayName = otherDisplayName;
         this.otherId = otherId;
         this.messages = messages;
     }
 
+
+    public String getOtherActualDisplayName() {
+        return otherActualDisplayName;
+    }
+
+    public void setOtherActualDisplayName(String otherActualDisplayName) {
+        this.otherActualDisplayName = otherActualDisplayName;
+    }
 
     public String getOtherDisplayName() {
         return otherDisplayName;

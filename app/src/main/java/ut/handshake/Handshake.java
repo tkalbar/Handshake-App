@@ -550,6 +550,9 @@ public class Handshake extends ActionBarActivity implements ListFragment.OnListL
         if (backStackEntries > 0) {
             getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             toolbar.setTitle("Handshake");
+            if (mDrawerLayout.isDrawerOpen(left_drawer)) {
+                mDrawerLayout.closeDrawer(left_drawer);
+            }
             mDrawerLayout.openDrawer(right_drawer);
         } else {
             super.onBackPressed();
@@ -561,7 +564,11 @@ public class Handshake extends ActionBarActivity implements ListFragment.OnListL
         Route curRoute = getCurrentRoute();
         ArrayList<String> convoStrings =  new ArrayList<>();
         for (Conversation convo : curRoute.getConversations()) {
-            convoStrings.add(convo.getOtherDisplayName());
+            if (convo.getOtherActualDisplayName() != null) {
+                convoStrings.add(convo.getOtherDisplayName() + " [" + convo.getOtherActualDisplayName() + "]");
+            } else {
+                convoStrings.add(convo.getOtherDisplayName());
+            }
         }
         //TODO: put actual convo timestamps
         ArrayList<String> convoTimeStamps =  new ArrayList<>();
@@ -647,8 +654,12 @@ public class Handshake extends ActionBarActivity implements ListFragment.OnListL
     }
 
     public void conversationClickHandler(String conversationName) {
+
+        // HORRIBLE HACK!
+        String[] splits = conversationName.split("\\[");
+        String finalName = splits[0].replaceAll("\\s+","");
         for (Conversation convo : getCurrentRoute().getConversations()) {
-            if (conversationName.equals(convo.getOtherDisplayName())) {
+            if (finalName.equals(convo.getOtherDisplayName())) {
                 activeConversation = convo.getOtherId();
             }
         }
@@ -709,12 +720,12 @@ public class Handshake extends ActionBarActivity implements ListFragment.OnListL
             mDrawerLayout.closeDrawer(left_drawer);
             mDrawerLayout.openDrawer(right_drawer);
         }
-        int backStackEntries = getSupportFragmentManager().getBackStackEntryCount();
+        /*int backStackEntries = getSupportFragmentManager().getBackStackEntryCount();
 
         if (backStackEntries > 0) {
             getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             toolbar.setTitle("Handshake");
-        }
+        }*/
     }
 
     public void helperUpdateRightDrawer() {
